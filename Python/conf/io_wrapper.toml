@@ -1,0 +1,23 @@
+# 标注了'FIXME'的是必须赋值的参数
+# 标注了'CHANGED'的是可能需要修改的参数
+# 标注了'NOTE'的是也许使用默认值即可的参数
+
+
+[io]                                        # 输入/输出器配置: 决定数据输入/输出格式和目标
+switch = true                               # NOTE: 数据输入/输出器开关
+format = 'console'                          # CHANGED: 'console'/'mqtt' -- 数据格式化目标，在plugins中实现
+selector = 'console'                        # CHANGED: 'console'/'mqtt' -- 数据输入/输出选择器，和format组合可以将不同格式的数据输入/输出到不同位置
+    [io.console]                            # 数据输入/输出器之一
+    [io.mqtt]                               # 数据输入/输出器之二
+    host = '127.0.0.1'                      # CHANGED: MQTT broker服务地址
+    port = 1883                             # NOTE: MQTT broker服务地址
+    username = ''                           # CHANGED: 用户名，mqtt允许匿名则留空
+    password = ''                           # CHANGED: 密码，mqtt允许匿名则留空
+    clientid = 'Test'                       # CHANGED: 客户端ID，为空则使用随机值
+    clean = false                           # NOTE: 是否清除连接会话，当clientid值为None、空字符串或随机值时必须为true
+    topics = ['system/monitor']             # FIXME: 发布/订阅的主题列表
+    qos = 1                                 # NOTE: 服务质量，可选值为：0, 1, 2
+    keepalive = 60                          # NOTE: 心跳包发送时间间隔
+    [io.tcp]                                # 数据输入/输出器之三
+    ip = '127.0.0.1'                        # CHANGED: Socket服务地址
+    port = 6799                             # CHANGED: Socket服务端口
