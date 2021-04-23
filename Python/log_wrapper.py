@@ -16,9 +16,12 @@ import os
 LEVEL = 2
 
 
-def logger_name(level=1, file=__file__):
+def logger_name(file=__file__, level=1):
     """生成logger name
+    以file为基础向上level个层级取得文件夹名作为Project名，
+    与后续文件夹及文件名组成logger名
 
+    :file: str      -- 调用该函数的文件名
     :level: int     -- 文件所在层级（相对于Project文件夹）
     :returns: str   -- logger name
 
@@ -76,7 +79,7 @@ def setup_logging(conf):
     backup_count = conf.get('backup_count', 10)  # count of log files
     log_format = conf.get('format', '%(message)s')  # log format
 
-    logger = logging.getLogger(logger_name(LEVEL))
+    logger = logging.getLogger(logger_name(file=__file__, level=LEVEL))
     logger.setLevel(logging.DEBUG)
 
     formatter = logging.Formatter(log_format, datefmt='%Y-%m-%d %H:%M:%S')
@@ -108,5 +111,5 @@ def setup_logging(conf):
 
 
 if __name__ == "__main__":
-    name = logger_name(LEVEL)
+    name = logger_name(file=__file__, level=LEVEL)
     print(name)
