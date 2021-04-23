@@ -13,7 +13,43 @@ import logging
 import logging.handlers
 import os
 
-LOGGER_NAME = 'Python'  # TODO: 根据项目名修改 <22-04-21, YJ> #
+LEVEL = 2
+
+
+def logger_name(level=1, file=__file__):
+    """生成logger name
+
+    :level: int     -- 文件所在层级（相对于Project文件夹）
+    :returns: str   -- logger name
+
+    """
+    # 获取当前文件绝对路径的目录部分
+    parent = os.path.dirname(file)
+    # 以系统分隔符分隔该部分
+    dir_list = parent.split(os.path.sep)
+
+    # level比目录层级数大时取层级数-1（为了屏蔽分隔出的空字符串），小于0时取值1
+    if int(level) > len(dir_list) - 1:
+        r_level = len(dir_list) - 1
+    elif 1 <= int(level) <= len(dir_list) - 1:
+        r_level = int(level)
+    else:
+        r_level = 1
+
+    # 项目和文件夹名
+    sep = '.'
+    effect_dir = list()
+    # 提取有效的文件夹名
+    for lv in range(r_level, 0, -1):
+        effect_dir.append(dir_list.pop(-lv))
+    dirname = sep.join(effect_dir)
+
+    # 文件名
+    filename = os.path.splitext(os.path.split(file)[1])[0]
+
+    logger_name = '{prefix}.{postfix}'.format(prefix=dirname, postfix=filename)
+
+    return logger_name
 
 
 def setup_logging(conf):
@@ -40,7 +76,7 @@ def setup_logging(conf):
     backup_count = conf.get('backup_count', 10)  # count of log files
     log_format = conf.get('format', '%(message)s')  # log format
 
-    logger = logging.getLogger(LOGGER_NAME)
+    logger = logging.getLogger(logger_name(LEVEL))
     logger.setLevel(logging.DEBUG)
 
     formatter = logging.Formatter(log_format, datefmt='%Y-%m-%d %H:%M:%S')
@@ -69,3 +105,8 @@ def setup_logging(conf):
         logger.addHandler(ch)
 
     return logger
+
+
+if __name__ == "__main__":
+    name = logger_name(LEVEL)
+    print(name)
