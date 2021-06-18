@@ -27,6 +27,9 @@ argumentParse -t test --test Test -ahola --arg=1516  # 必需参数和可选参�
 ####################################################################
 #+++++++++++++++++++++++++ Define Variable ++++++++++++++++++++++++#
 ####################################################################
+#------------------------- Program Variable
+# program name
+name=$(basename "$0")
 #------------------------- Exit Code Variable
 readonly normal=0        # 一切正常
 readonly err_param=2     # 参数错误
@@ -39,7 +42,7 @@ readonly err_unknown=255 # 未知错误
 function argumentParse() {
   # 给定了选项，交给getopt处理
   # getopt默认短选项可以连写，需要处理
-  TEMP=$(getopt --options "hvt:a::" --longoptions "help,version,test:,arg::" -n "argumentParse" -- "$@")
+  TEMP=$(getopt --options "hvt:a::" --longoptions "help,version,test:,arg::" -n "$name" -- "$@")
   eval set -- "$TEMP"
 
   if [[ ${#@} -lt 2 ]]; then
