@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-: <<!
+: << !
 Name: check_user.sh
 Author: YJ
 Email: yj1516268@outlook.com

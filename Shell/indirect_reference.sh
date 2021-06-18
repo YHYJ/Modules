@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-: <<!
+: << !
 Name: indirect_reference.sh
 Author: YJ
 Email: yj1516268@outlook.com

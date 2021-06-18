@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-: <<!
+: << !
 Name: argument_parse.sh
 Author: YJ
 Email: yj1516268@outlook.com
@@ -52,58 +52,58 @@ function argumentParse() {
   else
     while true; do
       case $1 in
-      -t | --test)
-        case $2 in
-        [a-z]* | [A-Z]*)
-          echo -e "testinfo: $2"
-          shift 2
+        -t | --test)
+          case $2 in
+            [a-z]* | [A-Z]*)
+              echo -e "testinfo: $2"
+              shift 2
+              ;;
+            "")
+              echo -e "未给定必需参数"
+              shift 2
+              ;;
+            *)
+              echo -e "参数值错误"
+              shift 2
+              ;;
+          esac
           ;;
-        "")
-          echo -e "未给定必需参数"
-          shift 2
+        -a | --arg)
+          case $2 in
+            [a-z]* | [A-Z]*)
+              echo -e "Option '$1'(Aa-Zz), argumet '$2'"
+              shift 2
+              ;;
+            [0-9]*)
+              echo -e "Option '$1'(0-9), argumet '$2'"
+              shift 2
+              ;;
+            "")
+              echo -e "Option '$1'(\"\"), argumet '$2'"
+              shift 2
+              ;;
+            *)
+              echo -e "Option '$1', ?"
+              shift 2
+              ;;
+          esac
+          ;;
+        -h | --help)
+          echo -e "helpinfo"
+          exit $normal
+          ;;
+        -v | --version)
+          echo -e "versioninfo"
+          exit $normal
+          ;;
+        --)
+          shift 1
+          break
           ;;
         *)
-          echo -e "参数值错误"
-          shift 2
+          echo -e "程序错误"
+          exit $err_unknown
           ;;
-        esac
-        ;;
-      -a | --arg)
-        case $2 in
-        [a-z]* | [A-Z]*)
-          echo -e "Option '$1'(Aa-Zz), argumet '$2'"
-          shift 2
-          ;;
-        [0-9]*)
-          echo -e "Option '$1'(0-9), argumet '$2'"
-          shift 2
-          ;;
-        "")
-          echo -e "Option '$1'(\"\"), argumet '$2'"
-          shift 2
-          ;;
-        *)
-          echo -e "Option '$1', ?"
-          shift 2
-          ;;
-        esac
-        ;;
-      -h | --help)
-        echo -e "helpinfo"
-        exit $normal
-        ;;
-      -v | --version)
-        echo -e "versioninfo"
-        exit $normal
-        ;;
-      --)
-        shift 1
-        break
-        ;;
-      *)
-        echo -e "程序错误"
-        exit $err_unknown
-        ;;
       esac
     done
   fi

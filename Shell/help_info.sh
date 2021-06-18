@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-: <<!
+: << !
 Name: help_info.sh
 Author: YJ
 Email: yj1516268@outlook.com
@@ -20,7 +20,8 @@ Depends:
 ####################################################################
 #------------------------- Program Variable
 # program name
-readonly name=$(basename "$0")
+name=$(basename "$0")
+readonly name
 
 #------------------------- Parameter Variable
 # description variable
@@ -39,7 +40,6 @@ function helpInfo() {
   echo -e "     $name [OPTION]"
   echo -e ""
   echo -e "Options:"
-  echo -e ""
   echo -e "     -h, --help        显示帮助信息"
   echo -e "     -v, --version     显示版本信息"
 }

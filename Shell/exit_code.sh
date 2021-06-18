@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-: <<!
+: << !
 Name: exit_code.sh
 Author: YJ
 Email: yj1516268@outlook.com

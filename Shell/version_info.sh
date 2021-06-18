@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-: <<!
+: << !
 Name: version_info.sh
 Author: YJ
 Email: yj1516268@outlook.com
@@ -19,7 +19,8 @@ Depends:
 #+++++++++++++++++++++++++ Define Variable ++++++++++++++++++++++++#
 ####################################################################
 # program name
-readonly name=$(basename "$0")
+name=$(basename "$0")
+readonly name
 # program version
 readonly major_version=0.1
 readonly minor_version=20200202
