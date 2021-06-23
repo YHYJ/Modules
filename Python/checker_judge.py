@@ -51,7 +51,7 @@ def checker(data):
     """检查数据结构是否符合要求
 
     :data: 待检查数据
-    :returns: bool
+    :returns: int
 
     """
     # 默认检查结果符合要求
