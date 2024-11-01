@@ -6,7 +6,7 @@ Author: YJ
 Email: yj1516268@outlook.com
 Created Time: 2020-03-27 04:47:02
 
-Description: checkUser()模块
+Description: checkUser()模块，检查当前用户是否是指定的用户名
 !
 
 ####################################################################
